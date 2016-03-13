@@ -10,7 +10,6 @@ import com.example.rajesh.popularmovies.R;
 
 
 /**
- * Created by rajesh on 9/21/15.
  */
 public class Utility {
 
@@ -37,7 +36,7 @@ public class Utility {
     }
 
 
-    public  static boolean isNetworkAvailable(Context context) {
+    public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();

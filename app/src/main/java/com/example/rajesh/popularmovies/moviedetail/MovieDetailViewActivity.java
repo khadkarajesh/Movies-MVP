@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MovieDetailActivity extends AppCompatActivity implements MovieDetail {
+public class MovieDetailViewActivity extends AppCompatActivity implements MovieDetailView {
 
     public static final String MOVIES_OBJECT = "movie";
     public static final String MOVIE_OBJECT_BUNDLE = "movie_bundle";
@@ -198,7 +198,7 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
 
     @Override
     public void onFailure(String message) {
-        Toast.makeText(MovieDetailActivity.this, "error message " + message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(MovieDetailViewActivity.this, "error message " + message, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -211,5 +211,17 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_INTENT_BASE_URI + key));
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        movieDetailPresenter.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        movieDetailPresenter.onResume();
     }
 }

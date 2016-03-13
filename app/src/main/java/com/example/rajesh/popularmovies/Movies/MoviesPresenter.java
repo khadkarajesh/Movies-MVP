@@ -25,15 +25,6 @@ public class MoviesPresenter implements MoviesPresenterContract, OnMovieLoadList
         moviesModel.getMovies(this, page);
     }
 
-    @Override
-    public void onDestroy() {
-        if (moviesView != null) {
-            moviesView = null;
-        }
-        if (moviesModel != null) {
-            moviesModel = null;
-        }
-    }
 
     @Override
     public void onSuccess(ArrayList<Movie> movies) {
@@ -49,5 +40,15 @@ public class MoviesPresenter implements MoviesPresenterContract, OnMovieLoadList
     public void onFailure(String message) {
         moviesView.onFailure(message);
         moviesView.hideProgress();
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onResume() {
+
     }
 }

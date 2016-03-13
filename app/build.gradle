@@ -22,7 +22,14 @@ android {
         it.buildConfigField 'String', 'MOVIE_API_KEY', '"3d9f6ef05faa3072ee2caf7fb6870964"'
     }
 }
-
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.realm:realm-gradle-plugin:0.88.0"
+    }
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'

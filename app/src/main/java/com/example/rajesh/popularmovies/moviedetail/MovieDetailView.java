@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  *
  */
-public interface MovieDetail {
+public interface MovieDetailView {
     void showComments(ArrayList<MovieComment> movieComments);
 
     void showMovieTrailers(ArrayList<MovieTrailer> movieTrailers);

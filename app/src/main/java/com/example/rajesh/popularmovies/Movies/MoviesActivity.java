@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.rajesh.popularmovies.R;
-import com.example.rajesh.popularmovies.moviedetail.MovieDetailActivity;
+import com.example.rajesh.popularmovies.moviedetail.MovieDetailViewActivity;
 import com.example.rajesh.popularmovies.rest.model.Movie;
 
 import java.util.ArrayList;
@@ -64,10 +64,10 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MoviesActivity.this, MovieDetailActivity.class);
+                Intent intent = new Intent(MoviesActivity.this, MovieDetailViewActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable(MovieDetailActivity.MOVIES_OBJECT, movieAdapter.getMovieAtPosition(position));
-                intent.putExtra(MovieDetailActivity.MOVIE_OBJECT_BUNDLE, bundle);
+                bundle.putParcelable(MovieDetailViewActivity.MOVIES_OBJECT, movieAdapter.getMovieAtPosition(position));
+                intent.putExtra(MovieDetailViewActivity.MOVIE_OBJECT_BUNDLE, bundle);
                 startActivity(intent);
             }
         });
@@ -104,8 +104,14 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        moviesPresenterContract.onDestroy();
+    protected void onResume() {
+        super.onResume();
+        moviesPresenterContract.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        moviesPresenterContract.onPause();
     }
 }

@@ -10,11 +10,11 @@ import java.util.ArrayList;
  */
 public class MovieDetailPresenter implements MovieDetailPresenterContract, OnCommentLoadListener, OnTrailerLoadListener {
 
-    MovieDetail movieDetail;
+    MovieDetailView movieDetailView;
     MovieDetailModelContract movieDetailModelContract;
 
-    public MovieDetailPresenter(MovieDetail movieDetail) {
-        this.movieDetail = movieDetail;
+    public MovieDetailPresenter(MovieDetailView movieDetailView) {
+        this.movieDetailView = movieDetailView;
         movieDetailModelContract = new MovieDetailModel();
     }
 
@@ -31,30 +31,40 @@ public class MovieDetailPresenter implements MovieDetailPresenterContract, OnCom
     @Override
     public void onCommentLoadSuccess(ArrayList<MovieComment> movieComments) {
         if (movieComments.size() > 0) {
-            movieDetail.showCommentTextView();
-            movieDetail.showComments(movieComments);
+            movieDetailView.showCommentTextView();
+            movieDetailView.showComments(movieComments);
         } else {
-            movieDetail.hideCommentTextView();
+            movieDetailView.hideCommentTextView();
         }
     }
 
     @Override
     public void onCommentLoadFailure(String message) {
-        movieDetail.onFailure(message);
+        movieDetailView.onFailure(message);
     }
 
     @Override
     public void onTrailerLoadSuccess(ArrayList<MovieTrailer> movieTrailers) {
         if (movieTrailers.size() > 0) {
-            movieDetail.showTrailerTextView();
-            movieDetail.showMovieTrailers(movieTrailers);
+            movieDetailView.showTrailerTextView();
+            movieDetailView.showMovieTrailers(movieTrailers);
         } else {
-            movieDetail.hideTrailerTextView();
+            movieDetailView.hideTrailerTextView();
         }
     }
 
     @Override
     public void onTrailerLoadFailure(String message) {
-        movieDetail.onFailure(message);
+        movieDetailView.onFailure(message);
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
+    public void onResume() {
+
     }
 }
