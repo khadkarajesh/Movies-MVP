@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PopularMovies</string>
+    <string name="movies_categories_key">categoriesKey</string>
+    <string name="default_movies_categories">popular</string>
+    <string name="favourite_categories_value">favourite</string>
+    <string name="movie_comment">One of the most interesting movies to watch. Humor, action and adventure well plotted into this great movie. The action is just great</string>
 </resources>

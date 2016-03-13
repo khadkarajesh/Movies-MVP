@@ -1,14 +1,17 @@
 package com.example.rajesh.popularmovies.Movies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.rajesh.popularmovies.R;
+import com.example.rajesh.popularmovies.moviedetail.MovieDetailActivity;
 import com.example.rajesh.popularmovies.rest.model.Movie;
 
 import java.util.ArrayList;
@@ -18,7 +21,6 @@ import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class MoviesActivity extends AppCompatActivity implements MoviesView {
-
     @Bind(R.id.gridView)
     GridView gridView;
 
@@ -56,6 +58,17 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
                 if (firstVisibleItem + visibleItemCount >= totalItemCount) {
                     moviesPresenterContract.loadMore(page++);
                 }
+            }
+        });
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MoviesActivity.this, MovieDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(MovieDetailActivity.MOVIES_OBJECT, movieAdapter.getMovieAtPosition(position));
+                intent.putExtra(MovieDetailActivity.MOVIE_OBJECT_BUNDLE, bundle);
+                startActivity(intent);
             }
         });
     }

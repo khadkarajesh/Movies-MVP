@@ -77,6 +77,10 @@ public class MovieAdapter extends BaseAdapter {
         return movieArrayList.isEmpty();
     }
 
+    public Movie getMovieAtPosition(int position) {
+        return movieArrayList.get(position);
+    }
+
     static class ViewHolder {
         @Bind(R.id.tv_movie_title)
         TextView tvMovieTitle;
