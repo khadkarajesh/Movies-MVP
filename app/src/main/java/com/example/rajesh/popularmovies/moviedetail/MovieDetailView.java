@@ -23,4 +23,8 @@ public interface MovieDetailView extends View {
     void hideTrailerTextView();
 
     void onFailure(String message);
+
+    void showFavouriteIcon();
+
+    void showUnFavouriteIcon();
 }

@@ -1,5 +1,6 @@
 package com.example.rajesh.popularmovies.moviedetail;
 
+import com.example.rajesh.popularmovies.rest.model.Movie;
 import com.example.rajesh.popularmovies.rest.model.MovieComment;
 import com.example.rajesh.popularmovies.rest.model.MovieTrailer;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by rajesh on 3/14/16.
  */
-public class MovieDetailPresenter implements MovieDetailPresenterContract, OnCommentLoadListener, OnTrailerLoadListener {
+public class MovieDetailPresenter implements MovieDetailPresenterContract, OnCommentLoadListener, OnTrailerLoadListener, OnMovieSaveListener {
 
     MovieDetailView movieDetailView;
     MovieDetailModelContract movieDetailModelContract;
@@ -26,6 +27,11 @@ public class MovieDetailPresenter implements MovieDetailPresenterContract, OnCom
     @Override
     public void getMovieComments(int movieId) {
         movieDetailModelContract.getComments(movieId, this);
+    }
+
+    @Override
+    public void addToFavorite(Movie movie) {
+        movieDetailModelContract.saveFavouriteMovie(movie);
     }
 
     @Override
@@ -65,6 +71,16 @@ public class MovieDetailPresenter implements MovieDetailPresenterContract, OnCom
 
     @Override
     public void onResume() {
+
+    }
+
+    @Override
+    public void onMovieSavedSuccess() {
+
+    }
+
+    @Override
+    public void onMovieSaveFailure() {
 
     }
 }

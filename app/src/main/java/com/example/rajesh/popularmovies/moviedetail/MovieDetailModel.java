@@ -2,6 +2,7 @@ package com.example.rajesh.popularmovies.moviedetail;
 
 import com.example.rajesh.popularmovies.BuildConfig;
 import com.example.rajesh.popularmovies.rest.RetrofitManager;
+import com.example.rajesh.popularmovies.rest.model.Movie;
 import com.example.rajesh.popularmovies.rest.model.MovieComment;
 import com.example.rajesh.popularmovies.rest.model.MovieComments;
 import com.example.rajesh.popularmovies.rest.model.MovieTrailer;
@@ -56,5 +57,10 @@ public class MovieDetailModel implements MovieDetailModelContract {
             }
         };
         RetrofitManager.getInstance().getTrailer(movieId, BuildConfig.MOVIE_API_KEY, movieTrailerInfoCallback);
+    }
+
+    @Override
+    public void saveFavouriteMovie(Movie movie) {
+
     }
 }

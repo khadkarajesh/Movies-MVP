@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MovieDetailActivity extends AppCompatActivity implements MovieDetailView {
 
@@ -203,6 +204,16 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
         Toast.makeText(MovieDetailActivity.this, "error message " + message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void showFavouriteIcon() {
+
+    }
+
+    @Override
+    public void showUnFavouriteIcon() {
+
+    }
+
     /**
      * opens the youtube application via intent
      *
@@ -227,16 +238,13 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
         movieDetailPresenter.onResume();
     }
 
-    public static Intent getLaunchIntent(Context context, Movie movie) {
-        Intent intent = new Intent(context, MovieDetailActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(MOVIES_OBJECT, movie);
-        intent.putExtra(MOVIE_OBJECT_BUNDLE, bundle);
-        return intent;
-    }
-
     @Override
     public Context getContext() {
         return this;
+    }
+
+    @OnClick({R.id.fab})
+    public void onClick() {
+        movieDetailPresenter.addToFavorite(movie);
     }
 }
