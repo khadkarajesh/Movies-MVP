@@ -3,10 +3,7 @@ package com.example.rajesh.popularmovies.rest.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.rajesh.popularmovies.rest.RetrofitManager;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 /**
  * Created by rajesh on 9/19/15.
@@ -37,13 +34,6 @@ public class Movie implements Parcelable {
 
     @SerializedName("vote_count")
     public int voteCount;
-
-    private List<Movie> movieArrayList;
-    private RetrofitManager retrofitManager;
-
-    public Movie() {
-        retrofitManager = RetrofitManager.getInstance();
-    }
 
     protected Movie(Parcel in) {
         id = in.readInt();
