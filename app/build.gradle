@@ -26,9 +26,6 @@ buildscript {
     repositories {
         jcenter()
     }
-    dependencies {
-        classpath "io.realm:realm-gradle-plugin:0.88.0"
-    }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')

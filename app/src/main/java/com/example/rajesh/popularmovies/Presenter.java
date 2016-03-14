@@ -1,4 +1,4 @@
-package com.example.rajesh.popularmovies.moviedetail;
+package com.example.rajesh.popularmovies;
 
 /**
  *

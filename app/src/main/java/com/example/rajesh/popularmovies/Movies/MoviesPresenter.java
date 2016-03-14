@@ -33,6 +33,7 @@ public class MoviesPresenter implements MoviesPresenterContract, OnMovieLoadList
         } else {
             moviesView.addMoreMovies(movies);
         }
+        movies.addAll(movies);
         moviesView.hideProgress();
     }
 

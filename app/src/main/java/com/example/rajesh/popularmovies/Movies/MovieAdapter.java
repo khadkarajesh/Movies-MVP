@@ -20,22 +20,22 @@ import butterknife.ButterKnife;
 
 public class MovieAdapter extends BaseAdapter {
 
-    ArrayList<Movie> movieArrayList = new ArrayList<>();
+    ArrayList<Movie> movies = new ArrayList<>();
     LayoutInflater inflater;
     private final String IMAGE_POSTER_BASE_URL = "http://image.tmdb.org/t/p/w342";
     private Context mContext;
 
 
-    public MovieAdapter(Context context, ArrayList<Movie> movieArrayList) {
+    public MovieAdapter(Context context, ArrayList<Movie> movies) {
         this.mContext = context;
-        movieArrayList.addAll(movieArrayList);
+        movies.addAll(movies);
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
 
     @Override
     public int getCount() {
-        return movieArrayList.size();
+        return movies.size();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class MovieAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        final Movie movie = movieArrayList.get(position);
+        final Movie movie = movies.get(position);
         ViewHolder holder;
         if (convertView != null) {
             holder = (ViewHolder) convertView.getTag();
@@ -69,16 +69,20 @@ public class MovieAdapter extends BaseAdapter {
 
 
     public void addMoreMovies(ArrayList<Movie> movies) {
-        movieArrayList.addAll(movies);
+        this.movies.addAll(movies);
         notifyDataSetChanged();
     }
 
     public boolean isAdapterEmpty() {
-        return movieArrayList.isEmpty();
+        return movies.isEmpty();
     }
 
     public Movie getMovieAtPosition(int position) {
-        return movieArrayList.get(position);
+        return movies.get(position);
+    }
+
+    public ArrayList<Movie> getMovies() {
+        return movies;
     }
 
     static class ViewHolder {

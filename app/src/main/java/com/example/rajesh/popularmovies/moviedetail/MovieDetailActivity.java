@@ -233,4 +233,9 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
         intent.putExtra(MOVIE_OBJECT_BUNDLE, bundle);
         return intent;
     }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
 }

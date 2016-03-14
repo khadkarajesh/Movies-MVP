@@ -1,5 +1,6 @@
 package com.example.rajesh.popularmovies.Movies;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -27,9 +28,11 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
     ProgressBar progressBar;
 
     MovieAdapter movieAdapter;
-    MoviesPresenterContract moviesPresenterContract;
+    MoviesPresenter moviesPresenter;
 
     int page = 1;
+
+    private static final String MOVIES = "movies";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +40,16 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
         setContentView(R.layout.activity_movies);
         ButterKnife.bind(this);
 
-        moviesPresenterContract = new MoviesPresenter(this);
-        moviesPresenterContract.getMovies(page);
+        moviesPresenter = new MoviesPresenter(this);
+        setMoviesAdapter();
 
-        ArrayList<Movie> arrayList = new ArrayList<>();
+        if (savedInstanceState != null) {
+            ArrayList<Movie> movies = savedInstanceState.getParcelableArrayList(MOVIES);
+            moviesPresenter.onSuccess(movies);
+        } else {
+            moviesPresenter.getMovies(page);
+        }
 
-        movieAdapter = new MovieAdapter(MoviesActivity.this, arrayList);
-        gridView.setAdapter(movieAdapter);
 
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -55,7 +61,7 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 Timber.d("first visible item  %d :: visible item count %d ", firstVisibleItem, visibleItemCount);
                 if (firstVisibleItem + visibleItemCount >= totalItemCount) {
-                    moviesPresenterContract.loadMore(page++);
+                    moviesPresenter.loadMore(page++);
                 }
             }
         });
@@ -66,6 +72,12 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
                 startActivity(MovieDetailActivity.getLaunchIntent(MoviesActivity.this, movieAdapter.getMovieAtPosition(position)));
             }
         });
+    }
+
+    private void setMoviesAdapter() {
+        ArrayList<Movie> arrayList = new ArrayList<>();
+        movieAdapter = new MovieAdapter(MoviesActivity.this, arrayList);
+        gridView.setAdapter(movieAdapter);
     }
 
     @Override
@@ -101,12 +113,23 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
     @Override
     protected void onResume() {
         super.onResume();
-        moviesPresenterContract.onResume();
+        moviesPresenter.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        moviesPresenterContract.onPause();
+        moviesPresenter.onPause();
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(MOVIES, movieAdapter.getMovies());
     }
 }
