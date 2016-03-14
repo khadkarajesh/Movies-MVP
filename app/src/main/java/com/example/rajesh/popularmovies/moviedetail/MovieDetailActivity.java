@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MovieDetailViewActivity extends AppCompatActivity implements MovieDetailView {
+public class MovieDetailActivity extends AppCompatActivity implements MovieDetailView {
 
     public static final String MOVIES_OBJECT = "movie";
     public static final String MOVIE_OBJECT_BUNDLE = "movie_bundle";
@@ -199,7 +199,7 @@ public class MovieDetailViewActivity extends AppCompatActivity implements MovieD
 
     @Override
     public void onFailure(String message) {
-        Toast.makeText(MovieDetailViewActivity.this, "error message " + message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(MovieDetailActivity.this, "error message " + message, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -227,7 +227,7 @@ public class MovieDetailViewActivity extends AppCompatActivity implements MovieD
     }
 
     public static Intent getLaunchIntent(Context context, Movie movie) {
-        Intent intent = new Intent(context, MovieDetailViewActivity.class);
+        Intent intent = new Intent(context, MovieDetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(MOVIES_OBJECT, movie);
         intent.putExtra(MOVIE_OBJECT_BUNDLE, bundle);

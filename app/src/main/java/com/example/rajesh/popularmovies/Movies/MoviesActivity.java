@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.rajesh.popularmovies.R;
-import com.example.rajesh.popularmovies.moviedetail.MovieDetailViewActivity;
+import com.example.rajesh.popularmovies.moviedetail.MovieDetailActivity;
 import com.example.rajesh.popularmovies.rest.model.Movie;
 
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(MovieDetailViewActivity.getLaunchIntent(MoviesActivity.this, movieAdapter.getMovieAtPosition(position)));
+                startActivity(MovieDetailActivity.getLaunchIntent(MoviesActivity.this, movieAdapter.getMovieAtPosition(position)));
             }
         });
     }
