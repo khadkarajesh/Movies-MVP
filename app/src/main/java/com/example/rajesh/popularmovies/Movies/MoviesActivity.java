@@ -1,6 +1,5 @@
 package com.example.rajesh.popularmovies.Movies;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -64,11 +63,7 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MoviesActivity.this, MovieDetailViewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(MovieDetailViewActivity.MOVIES_OBJECT, movieAdapter.getMovieAtPosition(position));
-                intent.putExtra(MovieDetailViewActivity.MOVIE_OBJECT_BUNDLE, bundle);
-                startActivity(intent);
+                startActivity(MovieDetailViewActivity.getLaunchIntent(MoviesActivity.this, movieAdapter.getMovieAtPosition(position)));
             }
         });
     }

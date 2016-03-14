@@ -1,5 +1,6 @@
 package com.example.rajesh.popularmovies.moviedetail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -223,5 +224,13 @@ public class MovieDetailViewActivity extends AppCompatActivity implements MovieD
     protected void onResume() {
         super.onResume();
         movieDetailPresenter.onResume();
+    }
+
+    public static Intent getLaunchIntent(Context context, Movie movie) {
+        Intent intent = new Intent(context, MovieDetailViewActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(MOVIES_OBJECT, movie);
+        intent.putExtra(MOVIE_OBJECT_BUNDLE, bundle);
+        return intent;
     }
 }
