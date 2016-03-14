@@ -3,6 +3,7 @@ package com.example.rajesh.popularmovies.Movies;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -27,6 +28,9 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
     @Bind(R.id.progressBar)
     ProgressBar progressBar;
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
     MovieAdapter movieAdapter;
     MoviesPresenter moviesPresenter;
 
@@ -39,6 +43,9 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+
 
         moviesPresenter = new MoviesPresenter(this);
         setMoviesAdapter();
