@@ -4,4 +4,6 @@
     <string name="default_movies_categories">popular</string>
     <string name="favourite_categories_value">favourite</string>
     <string name="movie_comment">One of the most interesting movies to watch. Humor, action and adventure well plotted into this great movie. The action is just great</string>
+    <string name="shared_transition">shared_transition</string>
+    <string name="movie_name_transition">movie_name_transition</string>
 </resources>

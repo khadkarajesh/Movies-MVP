@@ -31,7 +31,8 @@
                 android:id="@+id/tv_movie_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="KingsMan" />
+                android:text="KingsMan"
+                android:transitionName="@string/movie_name_transition" />
         </LinearLayout>
 
     </LinearLayout>

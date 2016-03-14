@@ -23,7 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/abc" />
+                android:src="@drawable/abc"
+                android:transitionName="@string/shared_transition" />
 
             <TextView
                 android:id="@+id/tv_movie_title"
@@ -31,7 +32,8 @@
                 android:layout_height="20dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
-                android:text="This is film" />
+                android:text="This is film"
+                android:transitionName="@string/movie_name_transition" />
 
         </LinearLayout>
 

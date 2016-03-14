@@ -1,6 +1,12 @@
 package com.example.rajesh.popularmovies.Movies;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rajesh.popularmovies.R;
+import com.example.rajesh.popularmovies.moviedetail.MovieDetailActivity;
 import com.example.rajesh.popularmovies.rest.model.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -49,10 +56,10 @@ public class MovieAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         final Movie movie = movies.get(position);
-        ViewHolder holder;
+        final ViewHolder holder;
         if (convertView != null) {
             holder = (ViewHolder) convertView.getTag();
         } else {
@@ -63,6 +70,25 @@ public class MovieAdapter extends BaseAdapter {
 
         holder.tvMovieTitle.setText(movie.title);
         Picasso.with(mContext).load(getImageUri(movie.posterPath)).placeholder(R.drawable.abc).into(holder.imgPoster);
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MovieDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(MovieDetailActivity.MOVIES_OBJECT, movies.get(position));
+                intent.putExtra(MovieDetailActivity.MOVIE_OBJECT_BUNDLE, bundle);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Pair<View, String> movieTitlePair = Pair.create((View) holder.tvMovieTitle, mContext.getResources().getString(R.string.movie_name_transition));
+                    Pair<View, String> moviePosterPair = Pair.create((View) holder.imgPoster, mContext.getResources().getString(R.string.shared_transition));
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mContext, moviePosterPair, movieTitlePair);
+                    mContext.startActivity(intent, optionsCompat.toBundle());
+                } else {
+                    mContext.startActivity(intent);
+                }
+            }
+        });
 
         return convertView;
     }

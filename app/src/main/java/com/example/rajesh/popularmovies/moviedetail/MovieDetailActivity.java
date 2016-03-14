@@ -111,6 +111,7 @@ public class MovieDetailActivity extends AppCompatActivity implements MovieDetai
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                supportFinishAfterTransition();
                 onBackPressed();
             }
         });

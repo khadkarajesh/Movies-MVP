@@ -1,7 +1,10 @@
 package com.example.rajesh.popularmovies.Movies;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -76,7 +79,18 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(MovieDetailActivity.getLaunchIntent(MoviesActivity.this, movieAdapter.getMovieAtPosition(position)));
+
+                Intent intent = new Intent(MoviesActivity.this, MovieDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(MovieDetailActivity.MOVIES_OBJECT, movieAdapter.getMovieAtPosition(position));
+                intent.putExtra(MovieDetailActivity.MOVIE_OBJECT_BUNDLE, bundle);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MoviesActivity.this, view, getResources().getString(R.string.shared_transition));
+                    startActivity(intent, optionsCompat.toBundle());
+                } else {
+                    startActivity(intent);
+                }
+
             }
         });
     }
