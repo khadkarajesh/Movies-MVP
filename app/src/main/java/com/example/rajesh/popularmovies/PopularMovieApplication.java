@@ -2,9 +2,10 @@ package com.example.rajesh.popularmovies;
 
 import android.app.Application;
 
-import com.example.rajesh.popularmovies.dagger.module.AppModule;
-import com.example.rajesh.popularmovies.dagger.module.component.DaggerMovieComponent;
+import com.example.rajesh.popularmovies.dagger.component.DaggerMovieComponent;
 import com.example.rajesh.popularmovies.dagger.component.MovieComponent;
+import com.example.rajesh.popularmovies.dagger.module.AppModule;
+import com.example.rajesh.popularmovies.dagger.module.NetworkModule;
 
 import timber.log.Timber;
 
@@ -17,7 +18,11 @@ public class PopularMovieApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        movieComponent = DaggerMovieComponent.builder().appModule(new AppModule(this)).build();
+        movieComponent = DaggerMovieComponent
+                .builder()
+                .appModule(new AppModule(this))
+                .networkModule(new NetworkModule(this))
+                .build();
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
