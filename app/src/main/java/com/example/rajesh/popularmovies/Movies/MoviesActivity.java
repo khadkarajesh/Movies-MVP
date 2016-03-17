@@ -1,6 +1,7 @@
 package com.example.rajesh.popularmovies.Movies;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,10 +11,13 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.rajesh.popularmovies.PopularMovieApplication;
 import com.example.rajesh.popularmovies.R;
 import com.example.rajesh.popularmovies.rest.model.Movie;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,11 +40,15 @@ public class MoviesActivity extends AppCompatActivity implements MoviesView {
 
     private static final String MOVIES = "movies";
 
+    @Inject
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
         ButterKnife.bind(this);
+        PopularMovieApplication.getMovieComponent().inject(this);
 
         setSupportActionBar(toolbar);
 
